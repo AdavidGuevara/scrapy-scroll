@@ -1,3 +1,6 @@
 # Infinite Scroll with Scrapy-Playwright.
 
-- Este programa fue desarrollado en Linux.
+- Se incluye el uso de items.
+- Se guarda la informacion en una base datos (MySQL).
+
+* Este programa fue desarrollado en Linux.
