@@ -5,4 +5,4 @@
 
 * Este programa fue desarrollado en Linux.
 
-### Nota: Al momento de realizar el spider de distintas formas se nota que siempre hace falta un item.
+#### Nota: Al momento de realizar el spider de distintas formas se nota que siempre hace falta un item.
