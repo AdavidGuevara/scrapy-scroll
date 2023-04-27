@@ -1,6 +1,7 @@
 import scrapy
+from scrapy.loader import ItemLoader
+from ..items import Quotes
 from scrapy_playwright.page import PageMethod
-from scrapy.selector import Selector
 
 
 class ScrollSpider(scrapy.Spider):
@@ -9,28 +10,25 @@ class ScrollSpider(scrapy.Spider):
     def start_requests(self):
         yield scrapy.Request(
             url="http://quotes.toscrape.com/scroll",
+            callback=self.parse,
             meta={
                 "playwright": True,
-                "playwright_page_methods": [PageMethod("wait_for_selector", ".quote")],
                 "playwright_include_page": True,
+                "playwright_page_methods": [
+                    PageMethod("wait_for_selector", "div.quote"),
+                    PageMethod(
+                        "evaluate",
+                        "setInterval(function () {var scrollingElement = (document.scrollingElement || document.body);scrollingElement.scrollTop = scrollingElement.scrollHeight;}, 200);",
+                    ),
+                    PageMethod("wait_for_load_state", "networkidle"),
+                ],
             },
-            errback=self.close_page,
         )
 
-    async def parse(self, response):
-        page = response.meta["playwright_page"]
-        for i in range(2, 11):
-            await page.evaluate("window.scrollBy(0, document.body.scrollHeight)")
-            quotes_count = 10 * i
-            await page.wait_for_selector(f".quote:nth-child({quotes_count})")
-        s = Selector(text=await page.content())
-        await page.close()
-        for q in s.css(".quote"):
-            yield {
-                "author": q.css(".author ::text").get(),
-                "quote": q.css(".text ::text").get(),
-            }
-
-    async def close_page(self, failure):
-        page = failure.request.meta["playwright_page"]
-        await page.close()
+    def parse(self, response):
+        for quote in response.xpath("//div[@class='quote']"):
+            item = ItemLoader(Quotes(), quote)
+            item.add_xpath("phrase", ".//span[@class='text']/text()")
+            item.add_xpath("author", ".//span[2]/small/text()")
+            yield item.load_item()
+        
