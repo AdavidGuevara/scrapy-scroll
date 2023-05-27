@@ -1,8 +1,6 @@
-# Infinite Scroll with Scrapy-Playwright.
+# Example of infinite scroll with Scrapy-Playwright.
 
-- Se incluye el uso de items.
-- Se guarda la informacion en una base datos (MySQL).
+- The use of items is included.
+- The information is stored in a database (MySQL).
 
-* Este programa fue desarrollado en Linux.
-
-#### Nota: Al momento de realizar el spider de distintas formas se nota que siempre hace falta un item.
+#### Note: When making the spider in different ways, it is noticeable that an item is always needed.
