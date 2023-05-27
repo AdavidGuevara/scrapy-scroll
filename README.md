@@ -1,3 +1,3 @@
-# Infinite Scroll with Scrapy-Playwright.
+# Example of Infinite Scrolling with Scrapy-Playwright.
 
-- Este programa fue desarrollado en Linux.
+- An iterative method is used to perform the scroll.
