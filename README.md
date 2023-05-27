@@ -1,7 +1,6 @@
-# Infinite Scroll with Scrapy-Playwright.
+# Example of infinite scroll with Scrapy-Playwright.
 
-- Se incluye el uso de items.
-- Se guarda la informacion en una base datos (MySQL).
-- Este programa fue desarrollado en Linux.
+- The use of items is included.
+- The information is stored in a database (MySQL).
 
-#### Nota: En este programa se intento usar un ciclo while persistiendo en el uso de Items, se puede notar que tambien nos hace falta un item. Esto ultimo parece indicar que esto se relaciona al uso de items (se investigara mas el tema) y no al uso de la funcion de javascript para hacer el scroll de manera "directa" usada en la version=1,1.
+#### Note: In this program we tried to use a while loop persisting in the use of Items, it can be noticed that we also need an item. The latter seems to indicate that this is related to the use of items (the subject will be further investigated) and not to the use of the javascript function to scroll in a "direct" way used in version=1.1.
